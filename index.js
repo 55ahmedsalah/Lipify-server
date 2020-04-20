@@ -11,7 +11,7 @@ var app = express()
 // app.set('uploads', path.join(__dirname, 'uploads'))
 // app.set('views', path.join(__dirname, 'views'))
 // app.set('view engine', 'ejs')
-// app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
+app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 
 app.post('/upload', upload.single("video"), function (req,res) {
     console.log("Received file " + req.file.originalname);
