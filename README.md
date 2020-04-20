@@ -6,4 +6,5 @@ Lipify's (Lip Reading Application) server
 
 ### Running
 1. Open a terminal in main folder
-2. `node index.js`
+2. `npm install`
+3. `node index.js`
