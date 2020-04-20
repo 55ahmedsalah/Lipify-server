@@ -21,11 +21,15 @@ app.post('/upload', upload.single("video"), function (req,res) {
     src.on('end', function() {
     	fs.unlinkSync(req.file.path);
     	res.json('OK: received ' + req.file.originalname);
+		return;
     });
     src.on('error', function(err) { res.json('Upload went wrong!'); });
 })
 
 app.get('/text', function (req,res) {
+	var spawn = require("child_process").spawn;
+	var process = spawn('python',["./main.py"]);
+	
 	console.log("-------------------------");
     console.log("Sending predicted text...");
 	
