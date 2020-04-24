@@ -1,4 +1,5 @@
 var express = require('express')
+var cors = require('cors')
 var fs = require('fs');
 var path = require('path');
 
@@ -8,6 +9,8 @@ var upload = multer({ dest: __dirname })
 const directory = 'uploads';
 
 var app = express()
+
+app.use(cors({credentials: true, origin: true}))
 
 app.use(function (req, res, next) {
 	const whitelist = ['https://55ahmedsalah.github.io/', 'http://localhost:5500', 'http://127.0.0.1:5500/', 'http://localhost:3000', 'http://127.0.0.1:3000/']; // array of whitelisted website
