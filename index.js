@@ -86,6 +86,7 @@ app.get('/folder', function (req, res) {
 
 let port = process.env.PORT || 3000;
 app.listen(port, '0.0.0.0', function () {
-  var ip = os.networkInterfaces()['Wi-Fi'][1].address;
+  var newArray = os.networkInterfaces()['Wi-Fi'].filter(function (el) { return el.family === "IPv4" });
+  var ip = newArray[0].address;
   return console.log("Server started on " + ip + ":" + port);
 });
