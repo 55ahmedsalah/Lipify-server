@@ -41,7 +41,23 @@ app.post('/upload', upload.single("video"), function (req, res) {
 
 app.get('/text', function (req, res) {
   var spawn = require("child_process").spawn;
-  var process = spawn('python', ["./main.py"]);
+  var process = spawn('python', ["main.py"]);
+  process.stdout.on("data", data => {
+    console.log(`stdout: ${data}`);
+  });
+
+  process.stderr.on("data", data => {
+  	console.log(`stderr: ${data}`);
+  });
+  
+  process.on('error', (error) => {
+  	console.log(`error: ${error.message}`);
+  });
+  
+  process.on("close", code => {
+  	console.log(`Python process exited with code ${code}`);
+  });
+  
   console.log("-------------------------");
   console.log("Sending predicted text...");
 
@@ -88,5 +104,23 @@ let port = process.env.PORT || 3000;
 app.listen(port, '0.0.0.0', function () {
   var newArray = os.networkInterfaces()['Wi-Fi'].filter(function (el) { return el.family === "IPv4" });
   var ip = newArray[0].address;
+  
+  var spawn = require("child_process").spawn;
+  var process = spawn('conda.bat', ["activate", "gp"]);
+  process.stdout.on("data", data => {
+    console.log(`stdout: ${data}`);
+  });
+
+  process.stderr.on("data", data => {
+  	console.log(`stderr: ${data}`);
+  });
+  
+  process.on('error', (error) => {
+  	console.log(`error: ${error.message}`);
+  });
+  
+  process.on("close", code => {
+  	console.log(`Python process exited with code ${code}`);
+  });
   return console.log("Server started on " + ip + ":" + port);
 });
